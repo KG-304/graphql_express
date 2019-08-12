@@ -1,17 +1,19 @@
 var express = require('express');
 var express_graphql = require('express-graphql');
 var { buildSchema } = require('graphql');
+const cors = require('cors')
+
 // GraphQL schema
 var schema = buildSchema(`
     type Query {
-        OpenMic(id: Int!): OpenMic
+        OpenMic(id: ID!): OpenMic
         OpenMics: [OpenMic]
     },
     type Mutation {
-        updateOpenMicLocation(id: Int!, location: String!): OpenMic
+        updateOpenMicLocation(id: ID!, location: String!): OpenMic
     }
     type OpenMic {
-        id: Int
+        id: ID!
         title: String
         location: String
         author: String
@@ -75,6 +77,7 @@ var root = {
 };
 // Create an express server and a GraphQL endpoint
 var app = express();
+app.use(cors())
 app.use('/graphql', express_graphql({
     schema: schema,
     rootValue: root,
