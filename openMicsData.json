@@ -1,0 +1,32 @@
+{
+    "data":
+    [
+        {
+            "id": "1",
+            "location": "27-16 23rd Avenue Astoria, NY 11105",
+            "title": "Open mic @ Q.E.D",
+            "author": "Hosted by: Chris Farley",
+            "description": "Be sure to come out and support your local comedians trying to make it big!",
+            "url": "https://qedastoria.com/",
+            "phone": "347-451-3873"
+        },
+        {
+            "id": 2,
+            "location": "10-93 JACKSON AVENUE",
+            "title": "Open mic @ Creek and Cabin",
+            "author": "Hosted By: Adam Sandler",
+            "description": "Come play games and support your local comedians in LIC!",
+            "url": "https://creeklic.com/",
+            "phone": "718-706-8783"
+        },
+        {
+            "id": "3",
+            "location": "307 W 26th Street New York, NY 10001 ",
+            "title": "Open mic @ Improv Asylum",
+            "author": "Hosted By: Tom Segura",
+            "description": "Come hang out with us tonight at our very own open mic!",
+            "url": "https://www.improvasylum.com/",
+            "phone": "212-203-5435"
+        }
+    ]
+}
