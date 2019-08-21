@@ -28,5 +28,12 @@
             "url": "https://www.improvasylum.com/",
             "phone": "212-203-5435"
         }
+    ],
+    "user": [
+        {
+            "firstName" :  "Karl",
+            "lastName" : "Gall",
+            "email": "kgall300@gmail.com"
+        }
     ]
 }
