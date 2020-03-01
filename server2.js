@@ -9,7 +9,7 @@ const cors = require('cors')
 var schema = buildSchema(`
     type Query {
         OpenMic(id: ID!): OpenMic
-        OpenMics: [OpenMic]
+        OpenMics(first: Int): [OpenMic]
         getUser(id: ID!): User
     },
     type Mutation {
@@ -47,7 +47,7 @@ var getOpenMic = function(args) {
 }
 
 var getOpenMics = function(args) {
-        return OpenMicsData.data;
+        return OpenMicsData.data.slice(0, args.first)
 }
 
 var updateOpenMicLocation = function({id, location}) {
