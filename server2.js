@@ -1,9 +1,9 @@
 var express = require("express");
 var express_graphql = require("express-graphql");
 var { buildSchema } = require("graphql");
-var invoices = require("./invoices.json");
-var vendors = require("./vendorData.json")
-var configs = require("./config.json")
+var invoices = require("./test_data/invoices.json");
+var vendors = require("./test_data/vendorData.json")
+var configs = require("./test_data/config.json")
 const cors = require("cors");
 
 // GraphQL schema
