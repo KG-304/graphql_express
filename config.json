@@ -1,0 +1,20 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "fieldName": "vendorId",
+            "displayName": "Vendor ID",
+            "display": false,
+            "filteringEnabled": false,
+            "sortingEnabled": true
+        },
+        {
+            "id": 2,
+            "fieldName": "vendorId",
+            "displayName": "Vendor ID",
+            "display": true,
+            "filteringEnabled": true,
+            "sortingEnabled": false
+        }
+    ]
+}

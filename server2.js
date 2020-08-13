@@ -1,77 +1,87 @@
-var express = require('express');
-var express_graphql = require('express-graphql');
-var { buildSchema } = require('graphql');
-var OpenMicsData = require('./OpenMicsData.json');
-var User = require('./user.json')
-const cors = require('cors')
+var express = require("express");
+var express_graphql = require("express-graphql");
+var { buildSchema } = require("graphql");
+var invoices = require("./invoices.json");
+var vendors = require("./vendorData.json")
+var configs = require("./config.json")
+const cors = require("cors");
 
 // GraphQL schema
 var schema = buildSchema(`
     type Query {
-        OpenMic(id: ID!): OpenMic
-        OpenMics(first: Int): [OpenMic]
-        getUser(id: ID!): User
+        Invoices(first: Int): [Invoice]
+        Vendors(first: Int): [Vendor]
+        Configs(id: ID!): Config
     },
-    type Mutation {
-        updateOpenMicLocation(id: ID!, location: String!): OpenMic
-    }
-    type OpenMic {
+
+    type Invoice{
         id: ID!
-        title: String
-        location: String
-        author: String
-        description: String
-        url: String
-        phone: String
+        vendorId: String
+        quantity: Int
+        product: String
+        amountBal: Float
+        amountDue: Float
+        invoiceDate: String
+    },
+
+    type Vendor{
+        vendorId: ID!
+        vendorName: String
+        creditBal: Float
     }
-    type User{
+
+    type Config{
         id: ID!
-        email: String
-        firstName: String
-        lastName: String
+        fieldName: String
+        displayName: String
+        display: Boolean
+        filteringEnabled: Boolean
+        sortingEnabled: Boolean
     }
 `);
 
-var getUser = function(args){
-    var id = args.id;
-    return User.data.filter(user => {
-        return user.id == id;
-    })[0];
+var Vendors = function (args) {
+    return vendors.data.slice(0, args.first);
 }
 
-var getOpenMic = function(args) { 
-    var id = args.id;
-    return OpenMicsData.data.filter(OpenMic => {
-        return OpenMic.id == id;
-    })[0];
+var Invoices = function (args) {
+ return invoices.data.slice(0, args.first);
+};
+
+var Configs = function (args){
+        return configs.data.filter((config) => {
+            return config.id == args.id;
+        })[0];
 }
 
-var getOpenMics = function(args) {
-        return OpenMicsData.data.slice(0, args.first)
-}
+// test for update
 
-var updateOpenMicLocation = function({id, location}) {
-    OpenMicsData.data.map(OpenMic => {
-        if (OpenMic.id === id) {
-            OpenMic.location = location;
-            return OpenMic;
-        }
-    });
-    return OpenMicsData.data.filter(OpenMic => OpenMic.id === id) [0];
-}
+// var updateOpenMicLocation = function ({ id, location }) {
+//   OpenMicsData.data.map((OpenMic) => {
+//     if (OpenMic.id === id) {
+//       OpenMic.location = location;
+//       return OpenMic;
+//     }
+//   });
+//   return OpenMicsData.data.filter((OpenMic) => OpenMic.id === id)[0];
+// };
 
 var root = {
-    User: getUser,
-    OpenMic: getOpenMic,
-    OpenMics: getOpenMics,
-    updateOpenMicLocation: updateOpenMicLocation
+  Invoices: Invoices,
+  Vendors: Vendors,
+  Configs: Configs
 };
 
 var app = express();
-app.use(cors())
-app.use('/graphql', express_graphql({
+app.use(cors());
+app.use(
+  "/graphql",
+  express_graphql({
     schema: schema,
     rootValue: root,
-    graphiql: true
-}));
-app.listen(4000, () => console.log('Express GraphQL Server Now Running On localhost:4000/graphql'));
+    graphiql: true,
+  })
+);
+app.listen(4000, () =>
+  console.log("iVoyant Test Server Now Running On localhost:4000/graphql")
+);

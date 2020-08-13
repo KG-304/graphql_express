@@ -1,23 +1,29 @@
-    type Query {
-        OpenMic(id: ID!): OpenMic
-        OpenMics(first: Int!): [OpenMic]
-        getUser(id: ID!): User
-    },
-    type Mutation {
-        updateOpenMicLocation(id: ID!, location: String!): OpenMic
-    }
-    type OpenMic {
-        id: ID!
-        title: String
-        location: String
-        author: String
-        description: String
-        url: String
-        phone: String
-    }
-    type User{
-        id: ID!
-        email: String
-        firstName: String
-        lastName: String
-    }
+type Query {
+    Invoices(first: Int): [Invoice]
+    Vendors(first: Int): [Vendor]
+},
+
+type Invoice{
+    id: ID!
+    vendorId: String
+    quantity: Int
+    product: String
+    amountBal: Float
+    amountDue: Float
+    invoiceDate: String
+},
+
+type Vendor{
+    vendorId: ID!
+    vendorName: String
+    creditBal: Float
+}
+
+type config{
+    id: ID!
+    fieldName: String
+    displayName: String
+    display: Boolean
+    filteringEnabled: Boolean
+    sortingEnabled: Boolean
+}
