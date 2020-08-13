@@ -1,10 +1,8 @@
-# graphql_express
+# node graphql_express
 
-GraphQL Express server for Open mics in the greater New York area.
-
+Dummy server for interview
 
 Run me:
-
 1. `npm install`
 2. `node server2.js`
 3. access GraphQL user interface by hitting localhost:4000/graphql
