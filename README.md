@@ -1,7 +1,5 @@
 # node graphql_express
 
-Dummy server for interview
-
 Run me:
 1. `npm install`
 2. `node server2.js`
